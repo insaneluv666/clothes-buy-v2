@@ -13,22 +13,35 @@ import Footer from "./components/Footer"
 
 function App() {
   return (
+    <AppWrapper>
       <Router>
         <Header />
-          <Routes>
+        <MainWrapper>
+            <Routes>
 
-            <Route path="/" element={<Home />} />
-            <Route path="/products" element={<Products />} />
-            <Route path="/products/product" element={<Product />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/profile" element={<Profile />} />
+              <Route path="/" element={<Home />} />
+              <Route path="/products" element={<Products />} />
+              <Route path="/products/product" element={<Product />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/profile" element={<Profile />} />
 
-          </Routes>
+            </Routes>
+          </MainWrapper>
         <Footer />
       </Router>
+    </AppWrapper>
   )
 }
 
+const AppWrapper = styled.div`
+  min-height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+`
+const MainWrapper = styled.div`
+  min-height: calc(100vh - 160px);
+`
 
 
 
