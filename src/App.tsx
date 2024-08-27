@@ -8,6 +8,7 @@ import Product from "./pages/Product"
 import Cart from "./pages/Cart"
 import Profile from "./pages/Profile"
 import Footer from "./components/Footer"
+import NotFound from "./pages/NotFound"
 
 
 
@@ -24,8 +25,9 @@ function App() {
               <Route path="/products/product" element={<Product />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/profile" element={<Profile />} />
-
+              <Route path="*" element={<NotFound />}/>
             </Routes>
+
           </MainWrapper>
         <Footer />
       </Router>
@@ -40,7 +42,7 @@ const AppWrapper = styled.div`
   flex-direction: column;
 `
 const MainWrapper = styled.div`
-  min-height: calc(100vh - 160px);
+  min-height: calc(100vh - 80px - 172px);
 `
 
 
