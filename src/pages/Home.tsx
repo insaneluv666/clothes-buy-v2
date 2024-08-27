@@ -71,7 +71,7 @@ const NewsWrapper = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
-  margin: 0 15%;
+  margin: 0 20%;
 `
 const NewsItem = styled.div`
   cursor: pointer;
