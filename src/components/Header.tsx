@@ -51,6 +51,7 @@ const NavLogo = styled.a`
 `
 const NavPages = styled.div`
   width: 25%;
+  min-width: 290px;
   display: flex;
   justify-content: space-between;
   a {
