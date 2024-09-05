@@ -7,8 +7,8 @@ interface CartInt {
     productType: string,
     brand: string,
     image: string,
-    price: string,
-    count: string,
+    price: number,
+    count: number,
 }
 
 const cartItems: Array<CartInt> = [
@@ -17,18 +17,24 @@ const cartItems: Array<CartInt> = [
     productType: 'T-Shirt',
     brand: 'Carhartt',
     image: './src/assets/products/carhartt tshirt1.jpg',
-    price: '50$',
-    count: '1'
+    price: 50,
+    count: 1
   },
   {
   id: 2,
   productType: 'T-Shirt',
   brand: 'Carhartt',
   image: './src/assets/products/carhartt tshirt2.jpg',
-  price: '50$',
-  count: '1'
+  price: 50,
+  count: 3
   },
 ]
+
+let totalPrice = 0;
+
+for (let i = 0; i < cartItems.length; i++) {
+  totalPrice += cartItems[i].price * cartItems[i].count
+}
 
 const Cart = () => {
   return (
@@ -42,7 +48,7 @@ const Cart = () => {
             <img src={el.image} alt="Product Image" className='product-image'/>
             <ProductText>
               <span>{el.productType} {el.brand}</span>
-              <Price>{el.price}</Price>
+              <Price>{el.price}$</Price>
             </ProductText>
           </ProductDescription>
           <ProductCount>
@@ -52,11 +58,11 @@ const Cart = () => {
             </RemoveBtn>
             <Counter>
               <CountMinus>-</CountMinus>
-              <span>2</span>
+              <span>{el.count}</span>
               <CountPlus>+</CountPlus>
             </Counter>
             <SumPrice>
-              <span>100$</span>
+              <span>{el.price * el.count}$</span>
             </SumPrice>
           </ProductCount>
         </Product>
@@ -65,7 +71,7 @@ const Cart = () => {
       <TotalSum>
         <TotalSumContent>
           <h1>Итог:</h1>
-          <h3>200$</h3>
+          <h3>{totalPrice}$</h3>
           <OrderBtn>Оформить заказ</OrderBtn>
         </TotalSumContent>
       </TotalSum>
@@ -194,6 +200,12 @@ const OrderBtn = styled.button`
   border-radius: 10px;
   font-size: 16px;
   font-weight: 400;
+  cursor: pointer;
+  transition: 200ms ease-in-out;
+  &:hover {
+    background-color: #c4c4c4;
+    color: #202020;
+  }
 `
 
 export default Cart;
