@@ -123,6 +123,7 @@ const Product = styled.div`
   img{
   width: 250px;
   height: 250px;
+  border-radius: 5px;
   margin-bottom: 15px;
   object-fit: cover;
   }
