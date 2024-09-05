@@ -63,7 +63,11 @@ const Cart = () => {
       )}
       </CartList>
       <TotalSum>
-        
+        <TotalSumContent>
+          <h1>Итог:</h1>
+          <h3>200$</h3>
+          <OrderBtn>Оформить заказ</OrderBtn>
+        </TotalSumContent>
       </TotalSum>
     </ListWrapper>
     </CartWrapper> 
@@ -163,11 +167,33 @@ const SumPrice = styled.p`
 `
 
 const TotalSum = styled.div`
+  height: 100%;
   width: 18%;
   margin-top: 30px;
   margin-left: 4%;
   background-color: #404040;
   border-radius: 5px;
+`
+const TotalSumContent = styled.div`
+  margin: 20px 10%;
+  h1 {
+    margin-bottom: 20px;
+  }
+  h3 {
+    margin-bottom: 20px;
+    font-size: 32px;
+    font-weight: 400;
+  }
+
+`
+const OrderBtn = styled.button`
+  width: 100%;
+  height: 50px;
+  background-color: #202020;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 400;
 `
 
 export default Cart;
