@@ -1,15 +1,173 @@
 import styled from "styled-components";
 
+import { AiFillDelete } from "react-icons/ai";
+
+interface CartInt {
+    id: number,
+    productType: string,
+    brand: string,
+    image: string,
+    price: string,
+    count: string,
+}
+
+const cartItems: Array<CartInt> = [
+  {
+    id: 1,
+    productType: 'T-Shirt',
+    brand: 'Carhartt',
+    image: './src/assets/products/carhartt tshirt1.jpg',
+    price: '50$',
+    count: '1'
+  },
+  {
+  id: 2,
+  productType: 'T-Shirt',
+  brand: 'Carhartt',
+  image: './src/assets/products/carhartt tshirt2.jpg',
+  price: '50$',
+  count: '1'
+  },
+]
+
 const Cart = () => {
   return (
     <CartWrapper>
-    <span>CART</span>
+    <h1>Корзина</h1>
+    <ListWrapper>
+      <CartList>
+      {cartItems.map(el =>
+        <Product key={el.id}>
+          <ProductDescription>
+            <img src={el.image} alt="Product Image" className='product-image'/>
+            <ProductText>
+              <span>{el.productType} {el.brand}</span>
+              <Price>{el.price}</Price>
+            </ProductText>
+          </ProductDescription>
+          <ProductCount>
+            <RemoveBtn>
+              <span>Удалить</span>
+              <AiFillDelete size={24}/>
+            </RemoveBtn>
+            <Counter>
+              <CountMinus>-</CountMinus>
+              <span>2</span>
+              <CountPlus>+</CountPlus>
+            </Counter>
+            <SumPrice>
+              <span>100$</span>
+            </SumPrice>
+          </ProductCount>
+        </Product>
+      )}
+      </CartList>
+      <TotalSum>
+        
+      </TotalSum>
+    </ListWrapper>
     </CartWrapper> 
   );
 }
  
 const CartWrapper = styled.div`
+  margin: 50px 10%;
+`
+const ListWrapper = styled.div`
+  display: flex;
+  width: 100%;
+`
+const CartList = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+  width: 78%;
+`
+const Product = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  background-color: #404040;
+  border-radius: 5px;
+`
+const ProductDescription = styled.div`
+  display: flex;
+  margin: 20px;
+  img {
+  width: 200px;
+  height: 200px;
+  border-radius: 5px;
+  object-fit: cover;
+  }
+`
+const ProductText = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+  color: #fff;
+  span {
+    font-size: 24px;
+    font-weight: 600;
+  }
+`
+const Price = styled.p`
+  margin-top: 5px;
+  font-size: 24px;
+  font-weight: 400;
+`
+const ProductCount = styled.p`
+  margin: 20px;
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: end;
+`
+const RemoveBtn = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: 200ms ease-in-out;
+  cursor: pointer;
+  span {
+    margin-right: 10px;
+  }
+  &:hover {
+    background-color: #202020;
+  }
+`
+const Counter = styled.p`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #606060;
+  span{
 
+  }
+`
+const CountMinus = styled.p`
+  background-color: #949494;
+  margin-right: 20px;
+  padding: 10px 15px;
+  cursor: pointer;
+`
+const CountPlus = styled.p`
+  background-color: #949494;
+  margin-left: 20px;
+  padding: 10px 15px;
+  cursor: pointer;
+`
+const SumPrice = styled.p`
+  font-size: 24px;
+`
+
+const TotalSum = styled.div`
+  width: 18%;
+  margin-top: 30px;
+  margin-left: 4%;
+  background-color: #404040;
+  border-radius: 5px;
 `
 
 export default Cart;
