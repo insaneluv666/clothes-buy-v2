@@ -18,8 +18,8 @@ const Header = () => {
         <NavLink to="/profile">
         <NavProfile>
           <NavProfInfo>
-            <span>John Smith</span>
-            <span>Client</span>
+            <h3>Тёма</h3>
+            <span>Покупатель</span>
           </NavProfInfo>
           <NavProfImg src={avatar} alt="avatar" />
         </NavProfile>
@@ -82,6 +82,9 @@ const NavProfInfo = styled.div`
   margin-right: 20px;
   color: #fff;
   font-style: normal;
+  h3 {
+    font-weight: 500;
+  }
 `
 const NavProfImg = styled.img`
   color: #fff;

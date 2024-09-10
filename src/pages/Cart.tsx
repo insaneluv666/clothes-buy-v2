@@ -48,6 +48,7 @@ const Cart = () => {
             <img src={el.image} alt="Product Image" className='product-image'/>
             <ProductText>
               <span>{el.productType} {el.brand}</span>
+              <h3>Цена за еденицу товара:</h3>
               <Price>{el.price}$</Price>
             </ProductText>
           </ProductDescription>
@@ -119,10 +120,14 @@ const ProductText = styled.div`
     font-size: 24px;
     font-weight: 600;
   }
+  h3 {
+    margin-top: 20px;
+    font-weight: 400;
+  }
 `
 const Price = styled.p`
-  margin-top: 5px;
-  font-size: 24px;
+  margin-top: 10px;
+  font-size: 18px;
   font-weight: 400;
 `
 const ProductCount = styled.p`
@@ -203,7 +208,7 @@ const OrderBtn = styled.button`
   cursor: pointer;
   transition: 200ms ease-in-out;
   &:hover {
-    background-color: #c4c4c4;
+    background-color: #fff;
     color: #202020;
   }
 `
