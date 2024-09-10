@@ -48,7 +48,7 @@ const Cart = () => {
             <img src={el.image} alt="Product Image" className='product-image'/>
             <ProductText>
               <span>{el.productType} {el.brand}</span>
-              <h3>Цена за еденицу товара:</h3>
+              <h3>Цена товара:</h3>
               <Price>{el.price}$</Price>
             </ProductText>
           </ProductDescription>
