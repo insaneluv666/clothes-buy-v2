@@ -1,48 +1,39 @@
 import styled from "styled-components";
+import { useState } from "react";
 
 import { AiFillDelete } from "react-icons/ai";
-
-interface CartInt {
-    id: number,
-    productType: string,
-    brand: string,
-    image: string,
-    price: number,
-    count: number,
-}
-
-const cartItems: Array<CartInt> = [
-  {
-    id: 1,
-    productType: 'T-Shirt',
-    brand: 'Carhartt',
-    image: './src/assets/products/carhartt tshirt1.jpg',
-    price: 50,
-    count: 1
-  },
-  {
-  id: 2,
-  productType: 'T-Shirt',
-  brand: 'Carhartt',
-  image: './src/assets/products/carhartt tshirt2.jpg',
-  price: 50,
-  count: 3
-  },
-]
-
-let totalPrice = 0;
-
-for (let i = 0; i < cartItems.length; i++) {
-  totalPrice += cartItems[i].price * cartItems[i].count
-}
+import initShoppingCart from "./../assets/data/cart-list"
 
 const Cart = () => {
+
+  const [shoppingCart, setShoppingCart] = useState(initShoppingCart)
+  
+  function increment(id: number) { 
+    setShoppingCart(shoppingCart.map(item => item.id === id ? { ...item, count: item.count + 1 } : item))
+  } 
+  function decrement(id: number) { 
+    setShoppingCart(shoppingCart.map(item => item.id === id && item.count > 1 ? { ...item, count: item.count - 1 } : item))
+  }
+  function removeProduct(id: number) {
+    setShoppingCart(shoppingCart.filter(item => item.id !== id))
+  }
+
+  function getTotalPrice() {
+    let totalPrice = 0;
+
+    for (let i = 0; i < shoppingCart.length; i++) {
+      totalPrice += shoppingCart[i].price * shoppingCart[i].count
+    }
+    return totalPrice;
+  }
+
+
   return (
     <CartWrapper>
     <h1>Корзина</h1>
     <ListWrapper>
       <CartList>
-      {cartItems.map(el =>
+      {shoppingCart.map(el =>
         <Product key={el.id}>
           <ProductDescription>
             <img src={el.image} alt="Product Image" className='product-image'/>
@@ -53,14 +44,14 @@ const Cart = () => {
             </ProductText>
           </ProductDescription>
           <ProductCount>
-            <RemoveBtn>
+            <RemoveBtn onClick={() => removeProduct(el.id)}>
               <span>Удалить</span>
               <AiFillDelete size={24}/>
             </RemoveBtn>
             <Counter>
-              <CountMinus>-</CountMinus>
+              <CountMinus onClick={() => decrement(el.id)}>-</CountMinus>
               <span>{el.count}</span>
-              <CountPlus>+</CountPlus>
+              <CountPlus onClick={() => increment(el.id)}>+</CountPlus>
             </Counter>
             <SumPrice>
               <span>{el.price * el.count}$</span>
@@ -72,7 +63,7 @@ const Cart = () => {
       <TotalSum>
         <TotalSumContent>
           <h1>Итог:</h1>
-          <h3>{totalPrice}$</h3>
+          <h3>{getTotalPrice()}$</h3>
           <OrderBtn>Оформить заказ</OrderBtn>
         </TotalSumContent>
       </TotalSum>
