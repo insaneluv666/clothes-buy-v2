@@ -1,80 +1,37 @@
 import styled from "styled-components";
+import { useState } from "react";
 
 import { FaCartPlus } from "react-icons/fa";
-
-interface ProductInt {
-  id : number,
-  productType: string,
-  brand: string,
-  image: string,
-  price: number,
-}
-
-const productItems: Array<ProductInt> = [
-  {
-    id: 1,
-    productType: 'T-Shirt',
-    brand: 'Carhartt',
-    image: './src/assets/products/carhartt tshirt1.jpg',
-    price: 50
-  },
-  {
-    id: 2,
-    productType: 'T-Shirt',
-    brand: 'Carhartt',
-    image: './src/assets/products/carhartt tshirt2.jpg',
-    price: 50
-  },
-  {
-    id: 3,
-    productType: 'Jacket',
-    brand: 'Carhartt',
-    image: './src/assets/products/carhartt jacket1.jpg',
-    price: 100
-  },
-  {
-    id: 4,
-    productType: 'Jacket',
-    brand: 'Carhartt',
-    image: './src/assets/products/carhartt jacket2.jpg',
-    price: 100
-  },
-  {
-    id: 5,
-    productType: 'Bag',
-    brand: 'Carhartt',
-    image: './src/assets/products/carhartt bag1.jpg',
-    price: 70
-  },
-  {
-    id: 6,
-    productType: 'T-Shirt',
-    brand: 'Wolee',
-    image: './src/assets/products/wolee tshirt1.webp',
-    price: 30
-  },
-  {
-    id: 7,
-    productType: 'Shorts',
-    brand: 'Wolee',
-    image: './src/assets/products/wolee shorts1.webp',
-    price: 25
-  },
-  {
-    id: 8,
-    productType: 'Pants',
-    brand: 'Wolee',
-    image: './src/assets/products/wolee pants1.webp',
-    price: 40
-  },
-]
+import initProductItems from "../assets/data/product-list"
+import initShoppingCart from "./../assets/data/cart-list"
 
 const Products = () => {
+
+//Рабочий вариант без стейта, но при удалении из корзины и переключении вкладок, возвращается
+
+  function addToCart(id: number) {
+    const productToAdd = initProductItems.find(item => item.id === id)
+    if(productToAdd){
+      shoppingCart.push({...productToAdd, count: 1})
+    }
+  }
+
+  const [shoppingCart, setShoppingCart] = useState(initShoppingCart)
+
+  // function addToCart(id: number) {
+  //   setShoppingCart(initProductItems.map(item => item.id === id && item ? shoppingCart.push({...item, count: 1}) : ))
+  // }
+
+  // function addToCart(id: number) {
+  //   const addedItem = initProductItems.filter(v => v.id === id);
+  //   setShoppingCart(val => [...val, addedItem])
+  // }
+
   return (
     <ProductsWrapper>
     <h1>Каталог товаров</h1>
     <ProductList>
-    {productItems.map(el => 
+    {initProductItems.map(el => 
           <Product key={el.id}>
             <img src={el.image} alt="Product Image" className='product-image'/>
             <ProductDescription>
@@ -82,7 +39,7 @@ const Products = () => {
                 <span>{el.productType} {el.brand}</span>
                 <Price>{el.price}$</Price>
               </ProductText>
-              <button>
+              <button onClick={() => addToCart(el.id)}>
                 <FaCartPlus/>
               </button>
             </ProductDescription>
