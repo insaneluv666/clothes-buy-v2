@@ -12,11 +12,11 @@ const Products = () => {
   function addToCart(id: number) {
     const productToAdd = initProductItems.find(item => item.id === id)
     if(productToAdd){
-      shoppingCart.push({...productToAdd, count: 1})
+      initShoppingCart.push({...productToAdd, count: 1})
     }
   }
 
-  const [shoppingCart, setShoppingCart] = useState(initShoppingCart)
+  // const [shoppingCart, setShoppingCart] = useState(initShoppingCart)
 
   // function addToCart(id: number) {
   //   setShoppingCart(initProductItems.map(item => item.id === id && item ? shoppingCart.push({...item, count: 1}) : ))
